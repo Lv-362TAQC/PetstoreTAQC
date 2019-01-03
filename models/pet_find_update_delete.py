@@ -8,7 +8,7 @@ class Pet:
     def __init__(self):
         self.url = BASE_URL + "/pet"
 
-    def cr_n_p(self, data_json):
+    def creat_new_p(self, data_json):
         creat_new_pet = requests.post(self.url, json=data_json)
         self.crnp = creat_new_pet.json()
         return self.crnp
@@ -17,13 +17,13 @@ class Pet:
         self.PET_ID = str(self.crnp['id'])
         return self.PET_ID
 
-    def fbid(self):
+    def find_b_id(self):
         find_by_id = requests.get(self.url + "/" + self.PET_ID)
         return find_by_id.json()
 
-    def chnp(self, newname):
-        chenge_name_pet = requests.post(self.url + "/" + self.PET_ID, data=newname)
-        return chenge_name_pet
+    def update_p(self, newname):
+        update_pet = requests.post(self.url + "/" + self.PET_ID, data=newname)
+        return update_pet
 
     def delete_pet(self):
         self.delete_pet_by_id = requests.delete(self.url + "/" + self.PET_ID)
@@ -41,15 +41,15 @@ if __name__ == "__main__":
 
     data_json = json.loads(data)
 
-    print(pet.cr_n_p(data_json))
+    print(pet.creat_new_p(data_json))
     print(pet.pet_id())
-    print(json.dumps(pet.fbid(), indent=4))
+    print(json.dumps(pet.find_b_id(), indent=4))
     newname = {'name': 'doggo130', 'status': 'sold'}
-    pet.chnp(newname)
-    print(json.dumps(pet.fbid(), indent=4))
+    pet.update_p(newname)
+    print(json.dumps(pet.find_b_id(), indent=4))
     pet.delete_pet()
     print('='*126)
-    if pet.fbid()["message"] == "Pet not found":
+    if pet.find_b_id()["message"] == "Pet not found":
         print("\n"*2 + ' '*56 + "Pet deleted!!!" + ' '*56 + "\n"*2)
     else:
         raise ImportError
