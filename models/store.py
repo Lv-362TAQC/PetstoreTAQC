@@ -18,21 +18,22 @@ file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
 
-BASE_URL = 'http://petstore.swagger.io/v2'
+BASE_URL = 'https://petstore.swagger.io/v2/store'
 
 
 class Store:
     def __init__(self):
-        self.url = BASE_URL + '/store'
+        self.url = BASE_URL
 
     def get_inventory(self):
         response = requests.get(self.url + '/inventory')
         status_code = response.status_code
         if status_code == 200:
             logger.info(f'Status code: {status_code}. Successful operation.')
-            return json.dumps(response.json(), ensure_ascii=False, indent=4)
+            return response # json.dumps(response.json(), ensure_ascii=False, indent=4)
         else:
             logger.debug(f'Status code: {status_code}. Something went wrong')
+            return response
 
     def order(self, j_inp):
         data_json = json.loads(j_inp)
@@ -40,22 +41,14 @@ class Store:
             response = requests.post(self.url + "/order", json=data_json)
             # print(response.content, response.headers['content-type'])
         except:
-            logger.debug(f'{response.status_code}')
+            logger.exception(f'{response.status_code}')
         finally:
-            return response
+            return response.json()
 
+    def check_order(self, order_id):
+        response = requests.get("https://petstore.swagger.io/v2/store/order/"+order_id)
+        return response.json()
 
-res = Store()
-
-print(res.get_inventory())
-data = """{
-  "id": 0,
-  "petId": 0,
-  "quantity": 0,
-  "shipDate": "2018-12-31T19:27:34.759Z",
-  "status": "placed",
-  "complete": false
-}"""
-
-print(res.order(data).text)
-print(res.order(data).headers['content-type'])
+    def del_order(self, order_id):
+        response = requests.delete(self.url+f"/order/{order_id}")
+        return response
