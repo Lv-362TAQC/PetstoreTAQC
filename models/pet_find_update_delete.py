@@ -1,23 +1,22 @@
 """ In this module we are trying to create, find by id, update and delete pets in our store """
+from http import HTTPStatus
 import json
 import logging
 import os.path
 import requests
 
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.DEBUG)
 
-""" Configure logging """
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-
-formatter = logging.Formatter('%(asctime)s -- %(module)s -- %(levelname)s -- %(message)s',
+FORMATTER = logging.Formatter('%(asctime)s -- %(module)s -- %(levelname)s -- %(message)s',
                               datefmt='%d/%m/%Y %H:%M:%S')
 if not os.path.exists("logs/"):
     os.makedirs("logs/")
-file_handler = logging.FileHandler(f'logs/{logger.name}.log')  # Save log to file
-file_handler.setLevel(logging.DEBUG)
-file_handler.setFormatter(formatter)
+FILE_HANDLER = logging.FileHandler(f'logs/{LOGGER.name}.log')
+FILE_HANDLER.setLevel(logging.DEBUG)
+FILE_HANDLER.setFormatter(FORMATTER)
 
-logger.addHandler(file_handler)
+LOGGER.addHandler(FILE_HANDLER)
 
 
 BASE_URL = "https://petstore.swagger.io/v2"
@@ -45,12 +44,11 @@ class Pet:
         """
         resp = requests.post(self.url, json=data_json)
         code = resp.status_code
-        if code == 200:
-            logger.info(f'CREATING...Status code: {code}. Successful operation.')
+        if code == HTTPStatus.OK:
+            LOGGER.info(f'CREATING...Status code: {code}. Successful operation.')
             return resp
-        else:
-            logger.warning(f'CREATING...Status code: {code}. Something went wrong')
-            return resp
+        LOGGER.warning(f'CREATING...Status code: {code}. Something went wrong')
+        return resp
 
     def get_pet_id(self):
         """
@@ -76,12 +74,11 @@ class Pet:
         """
         resp = requests.post(self.url + "/" + pet_id, data=new_name)
         code = resp.status_code
-        if code == 200:
-            logger.info(f'UPDATING...Status code: {code}. Successful operation.')
+        if code == HTTPStatus.OK:
+            LOGGER.info(f'UPDATING...Status code: {code}. Successful operation.')
             return resp
-        else:
-            logger.warning(f'UPDATING...Status code: {code}. Something went wrong')
-            return resp
+        LOGGER.warning(f'UPDATING...Status code: {code}. Something went wrong')
+        return resp
 
     def delete_pet(self, pet_id: str):
         """
@@ -91,12 +88,11 @@ class Pet:
         """
         resp = requests.delete(self.url + "/" + pet_id)
         code = resp.status_code
-        if code == 200:
-            logger.info(f'DELETING...Status code: {code}. Successful operation.')
+        if code == HTTPStatus.OK:
+            LOGGER.info(f'DELETING...Status code: {code}. Successful operation.')
             return resp
-        else:
-            logger.warning(f'DELETING...Status code: {code}. Something went wrong')
-            return resp
+        LOGGER.warning(f'DELETING...Status code: {code}. Something went wrong')
+        return resp
 
 
 if __name__ == "__main__":

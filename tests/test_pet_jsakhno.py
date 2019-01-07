@@ -1,8 +1,9 @@
 """Testing pet_find_update_delete"""
-
+from models.pet_find_update_delete import Pet
+from http import HTTPStatus
 import pytest
 import json
-from models.pet_find_update_delete import Pet
+
 
 DATA = """{
   "name": "doggo",
@@ -16,7 +17,7 @@ p = Pet(DATA_JSON)
 
 
 def test_crating():
-    assert p.creat_new_p(DATA_JSON).status_code == 200
+    assert p.creat_new_p(DATA_JSON).status_code == HTTPStatus.OK
     assert p.creat_new_p(DATA_JSON).headers['Content-Type'] == 'application/json'
     assert p.new_pet['name'] == DATA_JSON['name']
     assert p.new_pet['status'] == DATA_JSON['status']
@@ -24,9 +25,9 @@ def test_crating():
 
 def test_finding():
     assert p.find_b_id(p.pet_id)['name'] == 'doggo'
-    assert p.find_b_id('1')['name'] == 'sed'
-    assert p.find_b_id('2')['name'] == 'amx'
-    assert p.find_b_id('3')['name'] == 'doggie'
+    assert p.find_b_id('811563')['name'] == 'evmicrdsir'
+    assert p.find_b_id('3663833108')['name'] == 'hello kity'
+    assert p.find_b_id('740639')['name'] == 'Savvy'
 
 
 def test_all_of_find():
