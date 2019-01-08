@@ -9,13 +9,24 @@ import pytest
 import requests
 from store_get_delete import Store
 
-BASE_URL = "https://petstore.swagger.io/v2"
+BASE_URL = "https://petstore.swagger.io/v2/store/order"
+
+S = Store()
+
+
+@pytest.mark.parametrize('order_id, get_val', [(-5, 404), (0, 404), (1, 200),
+                                               (2, 200), (3, 200), (4, 200), (5, 200),
+                                               (6, 200), (7, 200), (8, 200), (9, 200),
+                                               (10, 200), (11, 404), (20, 404)])
+def test_get(order_id, get_val):
+    """checking store_get func"""
+    assert S.storeget(order_id).status_code == get_val
 
 
 def storepost(data):
     """POST data before DELETE."""
     data_json = json.loads(data)
-    requests.post(BASE_URL + "/store/order", json=data_json)
+    requests.post(BASE_URL, json=data_json)
 
 
 DATA1 = """{
@@ -39,20 +50,8 @@ DATA2 = """{
 storepost(DATA2)
 
 
-S = Store()
-
-
 @pytest.mark.parametrize('del_id, get_value', [(17, 404),
                                                (22, 404)])
-def test_gets(del_id, get_value):
+def test_del(del_id, get_value):
     """checking store_delete func"""
     assert S.storedelete(del_id).status_code == get_value
-
-
-@pytest.mark.parametrize('order_id, get_val', [(-5, 404), (0, 404), (1, 200),
-                                               (2, 200), (3, 200), (4, 200), (5, 200),
-                                               (6, 200), (7, 200), (8, 200), (9, 200),
-                                               (10, 200), (11, 404), (20, 404)])
-def test_get(order_id, get_val):
-    """checking store_get func"""
-    assert S.storeget(order_id).status_code == get_val
