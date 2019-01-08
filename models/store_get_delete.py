@@ -18,7 +18,7 @@ logging.basicConfig(filename="D://api.log",
 
 
 class Store:
-    """Creating class for testing GET & POST methods."""
+    """Creating class for testing GET & DELETE methods."""
     def __init__(self):
         self.url = BASE_URL
 
