@@ -37,8 +37,3 @@ class Store:
         requests.delete(BASE_URL + "/store/order/" + str(del_id))
         response = requests.get(BASE_URL + "/store/order/" + str(del_id))
         return response
-
-
-# S = Store()
-# S.storeget(9)
-# S.storedelete(8)
