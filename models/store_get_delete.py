@@ -29,7 +29,7 @@ class Store:
             LOGGER.info("{}".format(response))
             LOGGER.warning("{}".format(response.json()))
         else:
-            LOGGER.info("{} - {}".format(response, 'Wrong ID value. Sorry'))
+            LOGGER.info("{} {} is {}".format(response, order_id, 'wrong ID value. Sorry'))
         return response
 
     def storedelete(self, del_id):
