@@ -86,7 +86,8 @@ class Pet:
         :param pet_id: str
         :return:
         """
-        resp = requests.delete(self.url + "/" + pet_id)
+        url = self.url + "/" + pet_id
+        resp = requests.delete(url)
         code = resp.status_code
         if code == HTTPStatus.OK:
             LOGGER.info(f'DELETING...Status code: {code}. Successful operation.')
