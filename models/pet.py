@@ -1,104 +1,94 @@
-""" In this module we are trying to create, find by id, update and delete pets in our store """
-from modells import Models
+"""methods for PET object """
+
+from http import HTTPStatus
 import json
+import logging
+import os.path
+import requests
+
+
+LOGGER = logging.getLogger('pet_logs')
+LOGGER.setLevel(logging.DEBUG)
+
+FORMATTER = logging.Formatter('%(levelname)-8s [%(asctime)s] %(filename)-8s %(funcName)-10s '
+                              '[LINE:%(lineno)s] %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+if not os.path.exists("../logs/"):
+    os.makedirs("../logs/")
+FILE_HANDLER = logging.FileHandler(f'../logs/{LOGGER.name}.log')  # Save log to file
+FILE_HANDLER.setLevel(logging.DEBUG)
+FILE_HANDLER.setFormatter(FORMATTER)
+
+LOGGER.addHandler(FILE_HANDLER)
+
+
+def convert_data_to_json(data: dict):
+    """Method that converts input data to json data"""
+    data = str(data).replace("'", "\"")
+    json_data = json.loads(data)
+    return json_data
 
 
 class Pet:
     """
-    PET
+    This is class of methods for Pet category of PetStore
+
     """
 
-    BASE_URL = "https://petstore.swagger.io/v2"
-    model = Models()
-
     def __init__(self):
-        """
-        constructor
-        """
-        self.id = None
-        self.category = None
-        self.name = None
-        self.photo = None
-        self.tags = None
-        self.status = None
+        self.pet_base_url = "https://petstore.swagger.io/v2/pet/"
 
-    @classmethod
-    def _creat_new(cls, data=None, json=None):
-        """
-        create new pet(need json file)
-        :param data_json: dict
-        :return:
-        """
-        url = cls.BASE_URL + "/pet"
-        response = cls.model.post(url, data=data, json=json)
-        return response
 
-    def get_info_new(self,  data_json):
-        response = Pet.creat_new(data_json)
-        response = json.loads(response.text)
-        self.id = response['id']
-        self.category = response['category']
-        self.name = response['name']
-        self.photo = response['photoUrls']
-        self.tags = response['tags']
-        self.status = response['status']
-        return self
-
-    @classmethod
-    def _find_by_id(cls, pet_id: str):
+    def create_new(self, **create_parameters):
         """
-        finding pet by id
-        :param pet_id: str
-        :return:
-        """
-        url = cls.url + "/" + pet_id
-        response = cls.model.get(url)
-        return response
+        Method to create new pet in database
 
-    def get_info_fined(self, pet_id):
-        response = Pet._find_by_id(pet_id)
-        response = json.loads(response.text)
-        self.id = response['id']
-        self.category = response['category']
-        self.name = response['name']
-        self.photo = response['photoUrls']
-        self.tags = response['tags']
-        self.status = response['status']
-        return self
+        :param **create_parameters - **kwargs values that can be considered:
+        - id: int64;
+        - category: {
+                    id: int64,
+                    name: str
+                    };
+        - name*: str;
+        - photoUrls*: [str] #list of strings;
+        - tags: [{
+                    id: int64,
+                    name: str
+                    }]; #list of dicts
+        - status: str # values that can be used: 'available', 'pending', 'sold'
+        Note: * - required parameters
 
-    @classmethod
-    def _update(cls, pet_id: str, new_data: dict):
+        :return json data
         """
-        updating pets info
-        :param pet_id: str
-        :param new_name: dict
-        :return:
-        """
-        url = cls.url + '/' + pet_id
-        response = cls.model.post(url, data=new_data)
-        return response
+        LOGGER.debug('Convert input data to JSON data')
+        json_data = convert_data_to_json(create_parameters)
+        LOGGER.info(f'input data converted to JSON data: {json_data}')
+        LOGGER.debug(f'Request: POST {json_data} to {self.pet_base_url}')
+        response_create_new = requests.post(self.pet_base_url, json=json_data)
+        if response_create_new.status_code == HTTPStatus.OK:
+            LOGGER.info(f'Response: Status code {response_create_new.status_code}' +
+                        f'{response_create_new.text}')
+        else:
+            LOGGER.warning(f'Response: Status code {response_create_new.status_code}' +
+                           f'{response_create_new.url} {response_create_new.text}')
+        return response_create_new
 
-    def get_updated_info(self, pet_id, new_data):
-        response = Pet._update(pet_id, new_data).text
-        self.id = response['id']
-        self.category = response['category']
-        self.name = response['name']
-        self.photo = response['photoUrls']
-        self.tags = response['tags']
-        self.status = response['status']
-        return self
-
-    @classmethod
-    def _delete(cls, pet_id: str):
+    def find_by_status(self, status: str):
         """
-        deleting pet from store
-        :param pet_id: str
-        :return:
-        """
-        url = cls.url + "/" + pet_id
-        response = cls.model.delete(url)
-        return response
-
-    def delete_go(self, pet_id):
-        response = Pet._delete(pet_id)
-        return response
+        Method that finds pet by it`s status in system
+        :param status: str values that can be considered:
+         - "available"
+         - "pending"
+         - "sold"
+         :return json data
+         """
+        request_url = self.pet_base_url + "findByStatus?status=" + status
+        LOGGER.debug(f'Request: GET {request_url}')
+        response_find_by_status = requests.get(request_url)
+        if response_find_by_status.status_code == HTTPStatus.OK:
+            print(response_find_by_status.text)
+            LOGGER.info(f'Response: Status code { response_find_by_status.status_code}' +
+                        f'{ response_find_by_status.text[:1000]}')
+        else:
+            LOGGER.warning(f'Response: Status code { response_find_by_status.status_code}' +
+                           f'{ response_find_by_status.url} { response_find_by_status.text[:1000]}')
+        return response_find_by_status
