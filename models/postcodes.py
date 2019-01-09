@@ -1,27 +1,11 @@
-"""Lookup a postcode, Bulk lookup postcodes, Get a random postcode.
+"""Methods: Lookup a postcode, Bulk lookup postcodes, Get a random postcode.
    For PostCodes API.
 """
 
 import json
-import logging
-import os.path
 from http import HTTPStatus
 import requests
-from models.logger import logger
-
-
-LOGGER = logging.getLogger(__name__)
-LOGGER.setLevel(logging.DEBUG)
-
-FORMATTER = logging.Formatter('%(asctime)s -- %(module)s -- %(levelname)s -- %(message)s',
-                              datefmt='%d/%m/%Y %H:%M:%S')
-if not os.path.exists("logs/"):
-    os.makedirs("logs/")
-FILE_HANDLER = logging.FileHandler(f'logs/{LOGGER.name}.log')
-FILE_HANDLER.setLevel(logging.DEBUG)
-FILE_HANDLER.setFormatter(FORMATTER)
-LOGGER.addHandler(FILE_HANDLER)
-
+from models.settings import LOGGER
 
 BASE_URL = 'https://postcodes.io/'
 
@@ -44,7 +28,7 @@ class PostCode:
         return response
 
     def lookup(self, post_code: str):
-        """Lookup a postcode"""
+        """Lookup a postcode."""
         response = requests.get(self.url + "/postcodes/" + post_code)
         status = response.status_code
         if status == HTTPStatus.OK:
@@ -54,7 +38,7 @@ class PostCode:
         return response
 
     def bulk_lookup(self, data: dict):
-        """Bulk lookup postcodes"""
+        """Bulk lookup postcodes."""
         data_json = json.loads(data)
         response = requests.post(self.url + "/postcodes", json=data_json)
         status = response.status_code
