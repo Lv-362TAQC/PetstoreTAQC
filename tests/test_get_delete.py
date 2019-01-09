@@ -5,11 +5,13 @@
     Negative or non-integer values will generate API errors. """
 
 import json
+from http import HTTPStatus
 import pytest
 import requests
 from store_get_delete import Store
 
-BASE_URL = "https://petstore.swagger.io/v2/store/order"
+
+BASE_URL = "https://petstore.swagger.io/v2/store/order/"
 
 S = Store()
 
@@ -23,36 +25,21 @@ def test_get(order_id, output):
     assert S.storeget(order_id).status_code == output
 
 
-def storepost(data):
-    """POST data before DELETE."""
-    data_json = json.loads(data)
-    requests.post(BASE_URL, json=data_json)
-
-
-DATA1 = """{
-  "id": 17,
+# POST data before DELETE.
+DATA_JSON = json.loads("""{
+  "id": 13,
   "petId": 123,
   "quantity": 1,
   "shipDate": "2018-12-31T08:23:29.842Z",
   "status": "placed",
   "complete": false
-}"""
-storepost(DATA1)
-
-DATA2 = """{
-  "id": 22,
-  "petId": 123,
-  "quantity": 1,
-  "shipDate": "2018-12-31T08:23:29.842Z",
-  "status": "placed",
-  "complete": false
-}"""
-storepost(DATA2)
+}""")
+requests.post(BASE_URL, json=DATA_JSON)
+# DELETE data.
+DEL_ID = 13
+S.storedelete(DEL_ID)
 
 
-@pytest.mark.parametrize('del_id, output', [(17, 404),
-                                            (22, 404)])
-def test_del(del_id, output):
-    """checking store_delete func"""
-
-    assert S.storedelete(del_id).status_code == output
+def test_del():
+    """checking order id for 404 status."""
+    assert requests.get(BASE_URL + str(DEL_ID)).status_code == HTTPStatus.NOT_FOUND
