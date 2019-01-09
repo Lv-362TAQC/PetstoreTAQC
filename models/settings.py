@@ -1,8 +1,5 @@
-from http import HTTPStatus
 import logging
 import os.path
-import json
-import requests
 
 LOGGER = logging.getLogger('pet_logs')
 LOGGER.setLevel(logging.DEBUG)
@@ -17,25 +14,16 @@ FILE_HANDLER.setFormatter(FORMATTER)
 
 LOGGER.addHandler(FILE_HANDLER)
 
+# CONSTANTS
+BASE_URL = 'https://petstore.swagger.io/v2/store'
 
-class LogginSettings:
-    def __init__(self):
-        self.LOGGER = logging.getLogger(__name__)
-        self.LOGGER.setLevel(logging.DEBUG)
-
-        self.FORMATTER = logging.Formatter('%(asctime)s -- %(module)s -- %(levelname)s -- %(message)s',
-                                      datefmt='%d/%m/%Y %H:%M:%S')
-        if not os.path.exists("logs/"):
-            os.makedirs("logs/")
-        self.FILE_HANDLER = logging.FileHandler(f'logs/{self.LOGGER.name}.log')
-        self.FILE_HANDLER.setLevel(logging.DEBUG)
-        self.FILE_HANDLER.setFormatter(self.FORMATTER)
-        self.LOGGER.addHandler(self.FILE_HANDLER)
-
-    def loggin(self, response):
-        code = response.status_code
-        if code == HTTPStatus.OK:
-            self.LOGGER.info(f'CREATING...Status code: {code}. Successful operation.')
-            return response
-        self.LOGGER.warning(f'CREATING...Status code: {code}. Something went wrong')
-        return response
+# Test data: Store
+STORE_TEST_DATA = [
+        """{"id": 8, "petId": 0, "quantity": 0, "shipDate": "2019-01-03T20:13:27.011Z",
+         "status": "placed", "complete": false}""",
+        """{"id": 5, "petId": 5, "quantity": 5, "shipDate": "", "status": "approved",
+         "complete": false}""",
+        """{"id": 0, "petId": 0, "quantity": 0, "shipDate": "2019-01-09T19:06:26.244Z",
+          "status": "placed", "complete": false}"""]
+STORE_EMPTY_DATA = """{}"""
+STORE_DEFAULT = """{"id":0,"petId":0,"quantity":0,"complete":false}"""
