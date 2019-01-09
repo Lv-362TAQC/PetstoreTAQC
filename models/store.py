@@ -15,6 +15,13 @@ class Store:
         logger.info(f'Status code: {status_code}. Successful operation.')
         return response
 
+    def get_order_id(self):
+        """Sending request with order id. M."""
+        response = requests.get(self.url + '/order/')
+        status_code = response.status_code
+        logger.info(f'Status code: {status_code}. Successful operation.')
+        return response
+
     def order(self, data: (str, bytes, bytearray)):
         """ Place an order.
         Args:
