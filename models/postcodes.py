@@ -7,6 +7,7 @@ import logging
 import os.path
 from http import HTTPStatus
 import requests
+from models.logger import logger
 
 
 LOGGER = logging.getLogger(__name__)
