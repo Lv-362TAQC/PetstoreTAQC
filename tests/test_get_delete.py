@@ -8,7 +8,7 @@ import json
 from http import HTTPStatus
 import pytest
 import requests
-from store_get_delete import Store
+from models.store_get_delete import Store
 
 
 BASE_URL = "https://petstore.swagger.io/v2/store/order/"
