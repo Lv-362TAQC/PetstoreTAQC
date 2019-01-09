@@ -31,7 +31,9 @@ def test_finding(id, corect_name):
 
 
 @allure.step('2')
-@pytest.mark.parametrize('param', [('id'), ('name'), ('status')])
+@pytest.mark.parametrize('param', [('id'),
+                                   ('name'),
+                                   ('status')])
 def test_all_of_find(param):
     with allure.step('Check all param finding by id.'):
         assert json_new_pet[param] == json_re(pet_id)[param]
