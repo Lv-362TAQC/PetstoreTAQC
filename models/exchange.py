@@ -1,7 +1,7 @@
 """Foreign exchange rates API with currency conversion"""
 
 import requests
-from models.logger import logger
+from models.settings import LOGGER as logger
 
 BASE_URL = 'https://api.exchangeratesapi.io'
 
