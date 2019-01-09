@@ -1,6 +1,6 @@
+from models.logger import logger
 import requests
 import json
-from models.logger import logger
 
 BASE_URL = 'https://petstore.swagger.io/v2/store'
 
