@@ -1,32 +1,33 @@
 """Testing store.py"""
 from models.store import Store
 from http import HTTPStatus
-from models.logger import logger
 import pytest
 import json
-
+import allure
+from models.settings import STORE_TEST_DATA, STORE_EMPTY_DATA, STORE_DEFAULT
 
 r = Store()
 
 
 def test_inventory():
-    assert r.get_inventory().status_code == HTTPStatus.OK
-    assert r.get_inventory().headers['Content-Type'] == 'application/json'
+    with allure.step("Check status code of inventory request."):
+        assert r.get_inventory().status_code == HTTPStatus.OK
+    with allure.step("Check content type of inventory request."):
+        assert r.get_inventory().headers['Content-Type'] == 'application/json'
 
 
-@pytest.mark.parametrize('data', [
-        """{"id": 8, "petId": 0, "quantity": 0, "shipDate": "2019-01-03T20:13:27.011Z", "status": "placed", "complete": false}""",
-        """{"id": 5, "petId": 5, "quantity": 5, "shipDate": "", "status": "approved", "complete": false}"""
-        ])
+@pytest.mark.parametrize('data', STORE_TEST_DATA)
 def test_order(data):
     data_id = json.loads(data)
-    r.del_order(data_id['id'])
-    assert r.order(data).json() == r.check_order(data_id['id']).json()
+    with allure.step("Prematurely delete order id that we are testing."):
+        r.del_order(data_id['id'])
+    with allure.step("Check if order with given id was placed."):
+        assert r.order(data).json() == r.check_order(data_id['id']).json()
 
 
-def test_order_negative():
-    data = """{}"""
-    assert r.order(data).text == """{"id":0,"petId":0,"quantity":0,"complete":false}"""
+def test_order_empty():
+    with allure.step("Check if server returns default response when it receives empty json input."):
+        assert r.order(STORE_EMPTY_DATA).text == STORE_DEFAULT
 
 
 def test_for_wrong_input():
