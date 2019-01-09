@@ -19,7 +19,6 @@ if not os.path.exists("logs/"):
 FILE_HANDLER = logging.FileHandler(f'logs/{LOGGER.name}.log')
 FILE_HANDLER.setLevel(logging.DEBUG)
 FILE_HANDLER.setFormatter(FORMATTER)
-
 LOGGER.addHandler(FILE_HANDLER)
 
 

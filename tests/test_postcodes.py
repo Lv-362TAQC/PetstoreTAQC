@@ -1,5 +1,6 @@
 import pytest
 import json
+import allure
 from models.postcodes import PostCode
 from http import HTTPStatus
 
