@@ -28,8 +28,7 @@ class Store:
         """Sending request with order id"""
         response = requests.get(BASE_URL + '/order/' + str(order_id))
         if response.status_code == HTTPStatus.OK:
-            LOGGER.info("{}".format(response))
-            LOGGER.info("{}".format(response.json()))
+            LOGGER.info("{} - {}".format('OK', response.json()))
         else:
             LOGGER.info("{} {} is {}".format(response, order_id, 'wrong ID value. Sorry'))
         return response
@@ -37,5 +36,4 @@ class Store:
     def storedelete(self, del_id):
         """DELETE data"""
         response = requests.delete(BASE_URL + '/order/' + str(del_id))
-        response = requests.get(BASE_URL + str(del_id))
         return response
