@@ -93,8 +93,6 @@ def test_add_pet_positive(input, output):
 
 
 @pytest.mark.parametrize('status', ['available', 'pending', 'sold'])
-def test_find_by_status(status):
-    var = Pet().find_by_status(status).json()
-    print(var)
-    for record in var:
+def test_status_sort(status):
+    for record in Pet().find_by_status(status).json():
         assert record['status'] == status
