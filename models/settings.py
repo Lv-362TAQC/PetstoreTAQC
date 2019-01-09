@@ -4,6 +4,19 @@ import os.path
 import json
 import requests
 
+LOGGER = logging.getLogger('pet_logs')
+LOGGER.setLevel(logging.DEBUG)
+
+FORMATTER = logging.Formatter('%(levelname)-8s [%(asctime)s] %(filename)-8s %(funcName)-10s '
+                              '[LINE:%(lineno)s] %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+if not os.path.exists("../logs/"):
+    os.makedirs("../logs/")
+FILE_HANDLER = logging.FileHandler(f'../logs/{LOGGER.name}.log')  # Save log to file
+FILE_HANDLER.setLevel(logging.DEBUG)
+FILE_HANDLER.setFormatter(FORMATTER)
+
+LOGGER.addHandler(FILE_HANDLER)
+
 
 class LogginSettings:
     def __init__(self):
@@ -26,18 +39,3 @@ class LogginSettings:
             return response
         self.LOGGER.warning(f'CREATING...Status code: {code}. Something went wrong')
         return response
-
-
-if __name__ == "__main__":
-    DATA = """{
-          "name": "doggo",
-          "photoUrls": ["string"],
-          "status": "available"
-        }"""
-    BASE_URL = "https://petstore.swagger.io/v2/pet"
-    DATA_JSON = json.loads(DATA)
-    NEW_NAME = {'name': 'doggo130', 'status': 'sold'}
-    ls = LogginSettings()
-    response = requests.post(BASE_URL, json=DATA_JSON)
-    serf =ls.loggin(response).json()
-    print(serf)
