@@ -1,7 +1,6 @@
 """Testing store.py"""
 from models.store import Store
 from http import HTTPStatus
-from models.logger import logger
 import pytest
 import json
 
