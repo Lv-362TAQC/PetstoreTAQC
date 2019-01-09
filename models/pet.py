@@ -71,10 +71,10 @@ class Pet:
         if response_find_by_status.status_code == HTTPStatus.OK:
             print(response_find_by_status.text)
             LOGGER.info(f'Response: Status code { response_find_by_status.status_code}' +
-                        f'{ response_find_by_status.text[:1000]}')
+                        f'{ response_find_by_status.text[:100]}')
         else:
             LOGGER.warning(f'Response: Status code { response_find_by_status.status_code}' +
-                           f'{ response_find_by_status.url} { response_find_by_status.text[:1000]}')
+                           f'{ response_find_by_status.url} { response_find_by_status.text[:100]}')
         return response_find_by_status
 
     def find_by_id(self, pet_id: str):
