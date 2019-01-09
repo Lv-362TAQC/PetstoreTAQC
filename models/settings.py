@@ -14,6 +14,7 @@ FILE_HANDLER.setFormatter(FORMATTER)
 
 LOGGER.addHandler(FILE_HANDLER)
 
+
 # CONSTANTS
 BASE_URL = 'https://petstore.swagger.io/v2/store'
 
