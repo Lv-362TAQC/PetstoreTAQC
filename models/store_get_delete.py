@@ -5,7 +5,9 @@
  Negative or non-integer values will generate API errors """
 
 import logging
+from http import HTTPStatus
 import requests
+
 BASE_URL = "https://petstore.swagger.io/v2/store/order/"
 
 
@@ -25,9 +27,9 @@ class Store:
     def storeget(self, order_id):
         """Sending request with order id"""
         response = requests.get(BASE_URL + str(order_id))
-        if response.status_code == 200:
+        if response.status_code == HTTPStatus.OK:
             LOGGER.info("{}".format(response))
-            LOGGER.warning("{}".format(response.json()))
+            LOGGER.info("{}".format(response.json()))
         else:
             LOGGER.info("{} {} is {}".format(response, order_id, 'wrong ID value. Sorry'))
         return response
