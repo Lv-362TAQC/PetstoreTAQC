@@ -56,7 +56,7 @@ class Latest:
         return response
 
 
-    def latest_sumbols(self):
+    def latest_symbols(self):
         response = requests.get(self.url + '?symbols=USD,GBP')
         status_code = response.status_code
         if status_code == OK:
@@ -132,36 +132,36 @@ class History:
     #     finally:
     #         return response
 
-
-res = Latest()
-d = res.latest_foreign().text
-h = res.latest_base().text
-w = res.latest_sumbols().text
-
-res = Day()
-u = res.historical().text
-
-res = History()
-p = res.rates_time_period().text
-n = res.specific_exchange_rates().text
-z = res.different_currency().text
-# s = json.loads(d)
-# print(s)
-# print(s["rates"]["HRK"])
-# data = """[{
-#   "id": 0,
-#   "username": "string",
-#   "firstName": "string",
-#   "lastName": "string",
-#   "email": "string",
-#   "password": "string",
-#   "phone": "string",
-#   "userStatus": 0
-# }]"""
 #
-# res.post_createWithArray(data)
+# res = Latest()
+# d = res.latest_foreign().text
+# h = res.latest_base().text
+# w = res.latest_symbols().text
 #
+# res = Day()
+# u = res.historical().text
 #
-# data_json = json.loads(data)
-# resp = requests.post(BASE_URL + "/user/createWithArray", json=data_json)
-# print(resp.json())
+# res = History()
+# p = res.rates_time_period().text
+# n = res.specific_exchange_rates().text
+# z = res.different_currency().text
+# # s = json.loads(d)
+# # print(s)
+# # print(s["rates"]["HRK"])
+# # data = """[{
+# #   "id": 0,
+# #   "username": "string",
+# #   "firstName": "string",
+# #   "lastName": "string",
+# #   "email": "string",
+# #   "password": "string",
+# #   "phone": "string",
+# #   "userStatus": 0
+# # }]"""
+# #
+# # res.post_createWithArray(data)
+# #
+# #
+# # data_json = json.loads(data)
+# # resp = requests.post(BASE_URL + "/user/createWithArray", json=data_json)
+# # print(resp.json())
