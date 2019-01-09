@@ -27,14 +27,15 @@ OK = 200
 
 
 class Latest:
+    url = BASE_URL + '/latest'
     def __init__(self):
-        self.url = BASE_URL + '/latest'
+        pass
 
 
     def latest_foreign(self):
         response = requests.get(self.url)
         status_code = response.status_code
-        if status_code == OK:
+        if response.status_code == OK:
             logger.info(f"Code status: {status_code}. Successful operation. URL: {self.url}")
             print(f"Code status: {status_code}. Successful operation. URL: {self.url}")
         else:
