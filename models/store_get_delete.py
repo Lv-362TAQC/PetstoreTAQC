@@ -5,8 +5,10 @@
  Negative or non-integer values will generate API errors """
 
 import logging
+from http import HTTPStatus
 import requests
-BASE_URL = "https://petstore.swagger.io/v2"
+
+BASE_URL = "https://petstore.swagger.io/v2/store/order/"
 
 
 LOGGER = logging.getLogger()
@@ -18,27 +20,22 @@ logging.basicConfig(filename="D://api.log",
 
 
 class Store:
-    """Creating class for testing GET & POST methods."""
+    """Creating class for testing GET & DELETE methods."""
     def __init__(self):
         self.url = BASE_URL
 
     def storeget(self, order_id):
         """Sending request with order id"""
-        response = requests.get(BASE_URL + "/store/order/" + str(order_id))
-        if response.status_code == 200:
+        response = requests.get(BASE_URL + str(order_id))
+        if response.status_code == HTTPStatus.OK:
             LOGGER.info("{}".format(response))
-            LOGGER.warning("{}".format(response.json()))
+            LOGGER.info("{}".format(response.json()))
         else:
-            LOGGER.info("{} - {}".format(response, 'Wrong ID value. Sorry'))
+            LOGGER.info("{} {} is {}".format(response, order_id, 'wrong ID value. Sorry'))
         return response
 
     def storedelete(self, del_id):
         """DELETE data"""
-        requests.delete(BASE_URL + "/store/order/" + str(del_id))
-        response = requests.get(BASE_URL + "/store/order/" + str(del_id))
+        requests.delete(BASE_URL + str(del_id))
+        response = requests.get(BASE_URL + str(del_id))
         return response
-
-
-# S = Store()
-# S.storeget(9)
-# S.storedelete(8)
