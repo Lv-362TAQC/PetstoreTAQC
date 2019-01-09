@@ -1,0 +1,317 @@
+<ns0:test-suite xmlns:ns0="urn:model.allure.qatools.yandex.ru" start="1547071963414" stop="1547071987624">
+  <name>tests</name>
+  <labels/>
+  <test-cases>
+    <test-case start="1547071963414" status="passed" stop="1547071964153">
+      <description>Testing method for check response code</description>
+      <name>test_exchange.test_latest_foreign</name>
+      <attachments>
+        <attachment source="3c15abf5-7e70-47e3-8a9e-7809398b7db5-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071964165" status="passed" stop="1547071964523">
+      <description>Testing method for check value</description>
+      <name>test_exchange.test_latest_foreign_hrk</name>
+      <attachments>
+        <attachment source="eeaa1ce4-64a3-4467-bb67-3d5dec15ac3d-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071964531" status="passed" stop="1547071964911">
+      <description>Testing method for check response code</description>
+      <name>test_exchange.test_latest_base</name>
+      <attachments>
+        <attachment source="c41ba048-02a3-4504-a794-24f3cd5ef86f-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071964931" status="passed" stop="1547071965300">
+      <description>Testing method for check response code</description>
+      <name>test_exchange.test_latest_symbols</name>
+      <attachments>
+        <attachment source="c9f18934-266f-4755-a8c7-f3ad8784599d-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071965320" status="passed" stop="1547071965693">
+      <description>Testing method for check latest symbols response</description>
+      <name>test_exchange.test_latest_foreign_response[inputs0]</name>
+      <attachments>
+        <attachment source="bb6d3bbd-0800-4cff-b549-050e4040f02d-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071965701" status="passed" stop="1547071966081">
+      <description>Testing method for check response code</description>
+      <name>test_exchange.test_historical</name>
+      <attachments>
+        <attachment source="152b5faf-6fd7-49cc-aaab-d0f9914c73b4-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071966101" status="passed" stop="1547071966592">
+      <description>Testing method for check response code</description>
+      <name>test_exchange.test_rates_time_period</name>
+      <attachments>
+        <attachment source="ff422355-1282-4fa9-89de-49303392dcf7-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071966612" status="passed" stop="1547071967014">
+      <description>Testing method for rates time period response</description>
+      <name>test_exchange.test_history[inputs0]</name>
+      <attachments>
+        <attachment source="a05d1491-b3d6-4223-a767-dd9ad3b4c131-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071967023" status="passed" stop="1547071967410">
+      <description>Testing method for check response code</description>
+      <name>test_exchange.test_specific_exchange_rates</name>
+      <attachments>
+        <attachment source="a11dbe3a-1c0f-42b5-80f6-b1c45102c370-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071967467" status="passed" stop="1547071967844">
+      <description>Testing method for specific exchange rates</description>
+      <name>test_exchange.test_spec_exchange[inputs0]</name>
+      <attachments>
+        <attachment source="dab56208-3628-4bda-a3ac-05788dea353c-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071967849" status="passed" stop="1547071968343">
+      <description>Testing method for check response code</description>
+      <name>test_exchange.test_different_currency</name>
+      <attachments>
+        <attachment source="44acd7d3-ffd9-4346-a109-1731cd39aaf9-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071968364" status="passed" stop="1547071968898">
+      <description>Testing method for specific exchange rates</description>
+      <name>test_exchange.test_diff_currency[inputs0]</name>
+      <attachments>
+        <attachment source="85f0725a-da74-42ce-a205-f410524961f0-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071968906" status="passed" stop="1547071969661">
+      <description>
+    test
+    </description>
+      <name>test_pet_add_and_find_by_status.test_add_pet_negative[input10-200]</name>
+      <attachments>
+        <attachment source="fc09cdb2-c2d8-48ac-b617-32930bd1d9b1-attachment.txt" title="Captured stdout call" type="text/plain"/>
+        <attachment source="d1ad91cb-6a56-4482-861e-fdbcf6a29392-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071969770" status="passed" stop="1547071980131">
+      <name>test_pet_add_and_find_by_status.test_find_by_status[available]</name>
+      <attachments>
+        <attachment source="6cb84624-0d79-4bc5-bfd5-e0cf23b681a7-attachment.txt" title="Captured stdout call" type="text/plain"/>
+        <attachment source="f3268031-e6f8-438a-b0c5-2acebd38b822-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071980167" status="passed" stop="1547071981068">
+      <name>test_pet_add_and_find_by_status.test_find_by_status[pending]</name>
+      <attachments>
+        <attachment source="eed0f58c-c8cb-446a-8517-17fe29bcc36c-attachment.txt" title="Captured stdout call" type="text/plain"/>
+        <attachment source="ac1cc6dd-bfdc-4002-86e6-4b32cf82d647-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071981098" status="passed" stop="1547071981840">
+      <name>test_pet_add_and_find_by_status.test_find_by_status[sold]</name>
+      <attachments>
+        <attachment source="dbd09ddb-996e-4097-85f0-9dbb200b1ad7-attachment.txt" title="Captured stdout call" type="text/plain"/>
+        <attachment source="3840018c-0117-403d-9818-0a1bd97cc157-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071981877" status="passed" stop="1547071983133">
+      <name>test_store.test_inventory</name>
+      <attachments>
+        <attachment source="24a73af8-298d-4de8-85c9-fe32b2e8a31e-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071983197" status="passed" stop="1547071985085">
+      <name>test_store.test_order[{"id": 8, "petId": 0, "quantity": 0, "shipDate": "2019-01-03T20:13:27.011Z", "status": "placed", "complete": false}]</name>
+      <attachments>
+        <attachment source="152f8d24-134b-4ef7-9509-7f7ebde2e269-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071985146" status="passed" stop="1547071986974">
+      <name>test_store.test_order[{"id": 5, "petId": 5, "quantity": 5, "shipDate": "", "status": "approved", "complete": false}]</name>
+      <attachments>
+        <attachment source="524d3324-fb9d-434f-bb9f-e265a2ab6238-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071986983" status="passed" stop="1547071987617">
+      <name>test_store.test_order_negative</name>
+      <attachments>
+        <attachment source="1cb6a097-e240-4561-a57c-fd492340f052-attachment.txt" title="Captured log call" type="text/plain"/>
+      </attachments>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+    <test-case start="1547071987622" status="passed" stop="1547071987624">
+      <name>test_store.test_for_wrong_input</name>
+      <attachments/>
+      <labels>
+        <label name="severity" value="normal"/>
+        <label name="thread" value="40688-MainThread"/>
+        <label name="host" value="DESKTOP-ADE8ULS"/>
+        <label name="framework" value="pytest"/>
+        <label name="language" value="cpython3"/>
+      </labels>
+      <steps/>
+    </test-case>
+  </test-cases>
+</ns0:test-suite>
