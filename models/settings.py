@@ -1,7 +1,7 @@
 import logging
 import os.path
 
-LOGGER = logging.getLogger('pet_logs')
+LOGGER = logging.getLogger('logs')
 LOGGER.setLevel(logging.DEBUG)
 
 FORMATTER = logging.Formatter('%(levelname)-8s [%(asctime)s] %(filename)-8s %(funcName)-10s '
