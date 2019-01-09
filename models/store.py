@@ -19,25 +19,25 @@ class Store:
             logger.info(f'Status code: {status_code}. Something went wrong')
             return response
 
-    def order(self, data: str):
+    def order(self, data: (str, bytes, bytearray)):
         """ Place an order.
         Args:
              data: str - json compatible string
         """
-        logger.info("Converting input to JSON format...")
-        data_json = json.loads(data)
-        logger.info("... input converted.")
         try:
+            logger.info("Converting input to JSON format...")
+            data_json = json.loads(data)
+            logger.info("... input converted.")
             response = requests.post(f"{self.url}/order", json=data_json)
             logger.info(f"POSTed input to address {self.url}/order")
-        except TypeError:
-            logger.exception(f'Status code: {response.status_code},\n{response}')
-        return response
+            return response
+        except AttributeError:
+            logger.exception("Wrong input type!")
 
     def check_order(self, order_id: int):
         """ Check order using it's id. """
         response = requests.get(f"{self.url}/order/{order_id}")
-        return response.json()
+        return response
 
     def del_order(self, order_id: int):
         """ Delete order using it's id. """
