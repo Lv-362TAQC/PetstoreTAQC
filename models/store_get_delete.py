@@ -13,7 +13,7 @@ BASE_URL = "https://petstore.swagger.io/v2/store"
 
 LOGGER = logging.getLogger()
 
-logging.basicConfig(filename="D://api.log",
+logging.basicConfig(filename="api.log",
                     level=logging.INFO,
                     format="%(levelname)s - %(message)s",
                     filemode='w')
