@@ -1,17 +1,79 @@
-import pytest
-import json
 from models.dog import Dog
 from http import HTTPStatus
 import allure
+import pytest
 
+
+@allure.testcase('', 'DogAPI')
+@allure.step('Check if input is image url')
+def step_is_jpg_image(url: str):
+    assert url.lower().endswith('.jpg')
+    allure.attach(url,attachment_type=allure.attachment_type.TEXT)
+
+@allure.step
+@allure.story('DogAPI')
 def test_find_request_positive():
-    assert Dog._find_request('https://dog.ceo/api/breeds/list/all').status_code == HTTPStatus.OK
+    response = Dog._find_request('https://dog.ceo/api/breeds/list/all')
+    with allure.step("Check status code, with valid url"):
+        assert response.status_code == HTTPStatus.OK
+    allure.attach(response.text, attachment_type=allure.attachment_type.TEXT)
 
+@allure.step
+@allure.story('DogAPI')
 def test_find_request_negative():
-    assert Dog._find_request('https://dog.ceo/api/wrong/link/all').status_code == HTTPStatus.NOT_FOUND
+    response = Dog._find_request('https://dog.ceo/api/wrong/link/all')
+    with allure.step("Check status code, with invalid url"):
+        assert response.status_code == HTTPStatus.NOT_FOUND
+    allure.attach(response.text, attachment_type=allure.attachment_type.TEXT)
 
-def test_response_positive():
-    assert isinstance(Dog._response('https://dog.ceo/api/breeds/list/all'), dict)
+@allure.step
+@allure.story('DogAPI')
+@pytest.mark.parametrize(('inputs', 'outputs'), [
+    ('https://dog.ceo/api/breeds/list/all', dict),
+    ('https://dog.ceo/api/breeds/image/random', str),
+    ('https://dog.ceo/api/breed/hound/images', list),
+    ('https://dog.ceo/api/breed/hound/list', list),
+    ('https://dog.ceo/api/breed/dingo/images/random', str)
+])
+def test_response_type_message(inputs, outputs):
+    response = Dog._response(inputs)
+    with allure.step("Check output type"):
+        assert isinstance(response, outputs)
+    allure.attach(str(response), attachment_type=allure.attachment_type.TEXT)
 
+@allure.step
+@allure.story('DogAPI')
+def test_get_breed_list():
+    dogs_list = Dog().get_breed_list()
+    with allure.step('Check if \'husky\' breed in output dict'):
+        assert 'husky' in dogs_list
+    with allure.step('Check if \'meow\' breed not in output dict'):
+        assert 'meow' not in dogs_list
+    allure.attach(str(dogs_list), attachment_type=allure.attachment_type.TEXT)
+
+@allure.step
+@allure.story('DogAPI')
 def test_get_random_image():
-    assert Dog().get_random_image('https://dog.ceo/api/breeds/image/random')
+    step_is_jpg_image(Dog().get_random_image())
+
+@allure.step
+@allure.story('DogAPI')
+def test_get_images_by_breed():
+    response_text = Dog().get_images_by_breed('hound')
+    for item in response_text:
+        step_is_jpg_image(item)
+    allure.attach(str(response_text), attachment_type=allure.attachment_type.TEXT)
+
+@allure.step
+@allure.story('DogAPI')
+@pytest.mark.parametrize('inputs, outputs', [('affenpinscher', []),
+                                             ('wolfhound', ['irish']),
+                                             ('mastiff', ['bull', 'english', 'tibetan'])])
+def test_get_subbreed_by_breed(inputs, outputs):
+    subbreed = Dog().get_subbreed_by_breed(inputs)
+    assert subbreed == outputs
+
+@allure.step
+@allure.story('DogAPI')
+def test_get_breed_random_image():
+    step_is_jpg_image(Dog().get_breed_random_image('husky'))

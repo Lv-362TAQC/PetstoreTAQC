@@ -1,25 +1,9 @@
 """."""
 import json
-import logging
-import logging.config
-import os.path
 import requests
 from http import HTTPStatus
+from models.settings import LOGGER, BASE_DOG_URL
 
-BASE_DOG_URL = 'https://dog.ceo/api/'
-
-""" Configure logger """
-LOGGER = logging.getLogger(__name__)
-LOGGER.setLevel(logging.DEBUG)
-
-formatter = logging.Formatter('%(levelname)-8s [%(asctime)s] %(filename)-15s %(funcName)-20s ['
-                              'LINE:%(lineno)s] %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-if not os.path.exists("../logs/"):
-    os.makedirs("../logs/")
-file_handler = logging.FileHandler(f'../logs/{LOGGER.name}.log')  # Save log to file
-file_handler.setLevel(logging.DEBUG)
-file_handler.setFormatter(formatter)
-LOGGER.addHandler(file_handler)
 
 
 class Dog:
@@ -30,6 +14,7 @@ class Dog:
         self.random_image = None
         self.breeds_image = None
         self.subbreeds = None
+        self.breed_random_image = None
 
     @classmethod
     def _find_request(cls, url:str) -> requests.models.Response:
@@ -44,16 +29,15 @@ class Dog:
 
         if not response.status_code == HTTPStatus.OK:
             return None
-        print(json.loads(response.text)['message'])
         return json.loads(response.text)['message']
 
-    def get_breed_list(self) -> dict or None:
+    def get_breed_list(self) -> dict:
         self.breeds_list = Dog._response(self.url + 'breeds/list/all')
         return self.breeds_list
 
-    def get_random_image(self) -> str or None:
-        self.breeds_list = Dog._response(self.url + 'breeds/image/random')
-        return self.get_random_image()
+    def get_random_image(self) -> str:
+        self.random_image = Dog._response(self.url + 'breeds/image/random')
+        return self.random_image
 
     def get_images_by_breed(self, breed: str) -> list:
         """
@@ -61,7 +45,7 @@ class Dog:
         JSON with list of URLs in it.
         """
         self.breeds_list = Dog._response(self.url + f'breed/{breed}/images')
-        return self.breeds_image
+        return self.breeds_list
 
     def get_subbreed_by_breed(self, breed: str) -> list:
         """
@@ -71,3 +55,6 @@ class Dog:
         self.subbreeds = Dog._response(self.url + f'breed/{breed}/list')
         return  self.subbreeds
 
+    def get_breed_random_image(self, breed: str):
+        self.breed_random_image = Dog._response(self.url + f'breed/{breed}/images/random')
+        return self.breed_random_image

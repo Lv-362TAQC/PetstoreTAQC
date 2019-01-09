@@ -17,6 +17,7 @@ LOGGER.addHandler(FILE_HANDLER)
 
 # CONSTANTS
 BASE_URL = 'https://petstore.swagger.io/v2/store'
+BASE_DOG_URL = 'https://dog.ceo/api/'
 
 # Test data: Store
 STORE_TEST_DATA = [
