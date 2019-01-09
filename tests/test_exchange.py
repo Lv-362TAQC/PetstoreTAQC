@@ -2,7 +2,7 @@ import pytest
 import json
 import pytest
 import logging
-from exchange_model.exchange import Latest, Day, History
+from models.exchange import Latest, Day, History
 from http import HTTPStatus
 import allure
 import os.path
