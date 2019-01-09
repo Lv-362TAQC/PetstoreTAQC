@@ -21,7 +21,6 @@ class Pet:
 
     base_url = "https://petstore.swagger.io/v2/pet/"
 
-
     def create_new(self, **create_parameters):
         """
         Method to create new pet in database
@@ -47,6 +46,7 @@ class Pet:
         json_data = convert_data_to_json(create_parameters)
         LOGGER.info(f'input data converted to JSON data: {json_data}')
         LOGGER.debug(f'Request: POST {json_data} to {self.base_url}')
+
         response_create_new = requests.post(self.base_url, json=json_data)
         if response_create_new.status_code == HTTPStatus.OK:
             LOGGER.info(f'Response: Status code {response_create_new.status_code}' +
