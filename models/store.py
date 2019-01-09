@@ -7,6 +7,7 @@ class Store:
     url = BASE_URL
 
     def get_inventory(self):
+        """Get whole inventory list."""
         response = requests.get(self.url + '/inventory')
         status_code = response.status_code
         LOGGER.info(f'Status code: {status_code}. Successful operation.')
