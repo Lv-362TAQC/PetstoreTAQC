@@ -1,22 +1,6 @@
 import requests
 import json
-import logging
-import os.path
-
-""" Configure logger """
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-
-formatter = logging.Formatter('%(asctime)s -- %(module)s -- %(levelname)s -- %(message)s',
-                              datefmt='%d/%m/%Y %H:%M:%S')
-if not os.path.exists("logs/"):
-    os.makedirs("logs/")
-file_handler = logging.FileHandler(f'logs/{logger.name}.log')  # Save log to file
-file_handler.setLevel(logging.DEBUG)
-file_handler.setFormatter(formatter)
-
-logger.addHandler(file_handler)
-
+from models.logger import logger
 
 BASE_URL = 'https://petstore.swagger.io/v2/store'
 
@@ -30,25 +14,32 @@ class Store:
         status_code = response.status_code
         if status_code == 200:
             logger.info(f'Status code: {status_code}. Successful operation.')
-            return response # json.dumps(response.json(), ensure_ascii=False, indent=4)
+            return response     # json.dumps(response.json(), ensure_ascii=False, indent=4)
         else:
-            logger.debug(f'Status code: {status_code}. Something went wrong')
+            logger.info(f'Status code: {status_code}. Something went wrong')
             return response
 
-    def order(self, j_inp):
-        data_json = json.loads(j_inp)
+    def order(self, data: str):
+        """ Place an order.
+        Args:
+             data: str - json compatible string
+        """
+        logger.info("Converting input to JSON format...")
+        data_json = json.loads(data)
+        logger.info("... input converted.")
         try:
-            response = requests.post(self.url + "/order", json=data_json)
-            # print(response.content, response.headers['content-type'])
-        except:
-            logger.exception(f'{response.status_code}')
-        finally:
-            return response.json()
+            response = requests.post(f"{self.url}/order", json=data_json)
+            logger.info(f"POSTed input to address {self.url}/order")
+        except TypeError:
+            logger.exception(f'Status code: {response.status_code},\n{response}')
+        return response
 
-    def check_order(self, order_id):
-        response = requests.get("https://petstore.swagger.io/v2/store/order/"+order_id)
+    def check_order(self, order_id: int):
+        """ Check order using it's id. """
+        response = requests.get(f"{self.url}/order/{order_id}")
         return response.json()
 
-    def del_order(self, order_id):
-        response = requests.delete(self.url+f"/order/{order_id}")
+    def del_order(self, order_id: int):
+        """ Delete order using it's id. """
+        response = requests.delete(f"{self.url}/order/{order_id}")
         return response

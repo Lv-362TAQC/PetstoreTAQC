@@ -1,19 +1,18 @@
 """Testing store.py"""
-
 import pytest
 import json
 from models.store import Store
+from http import HTTPStatus
 
 r = Store()
 
 
 def test_inventory():
-    assert r.get_inventory().status_code == 200
+    assert r.get_inventory().status_code == HTTPStatus.OK
     assert r.get_inventory().headers['Content-Type'] == 'application/json'
 
-
+@pytest.mark.parametrize('input')
 def test_order():
-    order_id = '8'
     data = """{
       "id": 8,
       "petId": 0,
