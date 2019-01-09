@@ -8,7 +8,7 @@ import logging
 from http import HTTPStatus
 import requests
 
-BASE_URL = "https://petstore.swagger.io/v2/store/order/"
+BASE_URL = "https://petstore.swagger.io/v2/store"
 
 
 LOGGER = logging.getLogger()
@@ -26,7 +26,7 @@ class Store:
 
     def storeget(self, order_id):
         """Sending request with order id"""
-        response = requests.get(BASE_URL + str(order_id))
+        response = requests.get(BASE_URL + '/order/' + str(order_id))
         if response.status_code == HTTPStatus.OK:
             LOGGER.info("{}".format(response))
             LOGGER.info("{}".format(response.json()))
@@ -36,6 +36,6 @@ class Store:
 
     def storedelete(self, del_id):
         """DELETE data"""
-        requests.delete(BASE_URL + str(del_id))
+        response = requests.delete(BASE_URL + '/order/' + str(del_id))
         response = requests.get(BASE_URL + str(del_id))
         return response
