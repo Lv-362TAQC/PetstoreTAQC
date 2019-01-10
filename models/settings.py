@@ -1,5 +1,6 @@
 import logging
 import os.path
+import json
 
 LOGGER = logging.getLogger('logs')
 LOGGER.setLevel(logging.DEBUG)
@@ -44,3 +45,17 @@ DOG_LINK_TYPE =[(f'{BASE_DOG_URL}breeds/list/all', dict),
 DOD_SUBBREEDS = [('affenpinscher', []),
                  ('wolfhound', ['irish']),
                  ('mastiff', ['bull', 'english', 'tibetan'])]
+
+"""set data for test_store_get_del"""
+BASE_URL_ORD = "https://petstore.swagger.io/v2/store/order/"
+
+# POST data before DELETE.
+DATA_JSON = json.loads("""{
+  "id": 3,
+  "petId": 123,
+  "quantity": 1,
+  "shipDate": "2018-12-31T08:23:29.842Z",
+  "status": "placed",
+  "complete": false
+}""")
+
