@@ -16,7 +16,9 @@ class Store:
     def order(self, data: (str, bytes, bytearray)):
         """ Place an order.
         Args:
-             data: str - json compatible string
+            data: str - json compatible string
+        Returns:
+            response - request response from server.
         """
         LOGGER.info("Converting input to JSON format...")
         data_json = json.loads(data)

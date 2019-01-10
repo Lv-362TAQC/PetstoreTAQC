@@ -4,7 +4,7 @@ from http import HTTPStatus
 import pytest
 import json
 import allure
-from models.settings import STORE_TEST_DATA, STORE_EMPTY_DATA, STORE_DEFAULT
+from models.settings import STORE_TEST_DATA, STORE_EMPTY_DATA, STORE_DEFAULT, STORE_WRONG_DATA
 
 r = Store()
 
@@ -30,5 +30,8 @@ def test_order_empty():
         assert r.order(STORE_EMPTY_DATA).text == STORE_DEFAULT
 
 @allure.step
+@pytest.mark.xfail
 def test_for_wrong_input():
-    pass    # wrong json input
+    with allure.step("Checking for valid inputs."):
+        if not isinstance(STORE_WRONG_DATA, (bytes, bytearray)):
+            raise TypeError("The JSON object must be str, bytes or bytearray")
