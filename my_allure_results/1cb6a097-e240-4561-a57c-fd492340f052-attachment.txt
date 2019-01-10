@@ -1,3 +1,0 @@
-store.py                    23 INFO     Converting input to JSON format...
-store.py                    25 INFO     ... input converted.
-store.py                    27 INFO     POSTed input to address https://petstore.swagger.io/v2/store/order
