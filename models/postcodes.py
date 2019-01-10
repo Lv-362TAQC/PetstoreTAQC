@@ -3,23 +3,9 @@
 """
 
 import json
-import logging
-import os.path
 from http import HTTPStatus
 import requests
-
-
-LOGGER = logging.getLogger(__name__)
-LOGGER.setLevel(logging.DEBUG)
-
-FORMATTER = logging.Formatter('%(asctime)s -- %(module)s -- %(levelname)s -- %(message)s',
-                              datefmt='%d/%m/%Y %H:%M:%S')
-if not os.path.exists("logs/"):
-    os.makedirs("logs/")
-FILE_HANDLER = logging.FileHandler(f'logs/{LOGGER.name}.log')
-FILE_HANDLER.setLevel(logging.DEBUG)
-FILE_HANDLER.setFormatter(FORMATTER)
-LOGGER.addHandler(FILE_HANDLER)
+from models.settings import LOGGER
 
 
 BASE_URL = 'https://postcodes.io/'
