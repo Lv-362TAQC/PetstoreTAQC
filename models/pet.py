@@ -21,7 +21,7 @@ class Pet:
 
     base_url = "https://petstore.swagger.io/v2/pet/"
 
-    def create_new(self, **create_parameters):
+    def create(self, **create_parameters):
         """
         Method to create new pet in database
 
@@ -47,14 +47,14 @@ class Pet:
         LOGGER.info(f'input data converted to JSON data: {json_data}')
         LOGGER.debug(f'Request: POST {json_data} to {self.base_url}')
 
-        response_create_new = requests.post(self.base_url, json=json_data)
-        if response_create_new.status_code == HTTPStatus.OK:
-            LOGGER.info(f'Response: Status code {response_create_new.status_code}' +
-                        f'{response_create_new.text}')
+        response = requests.post(self.base_url, json=json_data)
+        if response.status_code == HTTPStatus.OK:
+            LOGGER.info(f'Response: Status code {response.status_code}' +
+                        f'{response.text}')
         else:
-            LOGGER.warning(f'Response: Status code {response_create_new.status_code}' +
-                           f'{response_create_new.url} {response_create_new.text}')
-        return response_create_new
+            LOGGER.warning(f'Response: Status code {response.status_code}' +
+                           f'{response.url} {response.text}')
+        return response
 
     def find_by_status(self, status: str):
         """
@@ -67,15 +67,14 @@ class Pet:
          """
         request_url = self.base_url + "findByStatus?status=" + status
         LOGGER.debug(f'Request: GET {request_url}')
-        response_find_by_status = requests.get(request_url)
-        if response_find_by_status.status_code == HTTPStatus.OK:
-            print(response_find_by_status.text)
-            LOGGER.info(f'Response: Status code { response_find_by_status.status_code}' +
-                        f'{ response_find_by_status.text[:100]}')
+        response = requests.get(request_url)
+        if response.status_code == HTTPStatus.OK:
+            LOGGER.info(f'Response: Status code { response.status_code}' +
+                        f'{ response.text[:100]}')
         else:
-            LOGGER.warning(f'Response: Status code { response_find_by_status.status_code}' +
-                           f'{ response_find_by_status.url} { response_find_by_status.text[:100]}')
-        return response_find_by_status
+            LOGGER.warning(f'Response: Status code { response.status_code}' +
+                           f'{ response.url} { response.text[:100]}')
+        return response
 
     def find_by_id(self, pet_id: str):
         """
@@ -115,3 +114,6 @@ class Pet:
             return response
         LOGGER.warning(f'DELETING...Status code: {code}. Something went wrong')
         return response
+
+print(Pet().create(id=12345, status='bred', name='breed', photoUrls=[]))
+print(Pet().find_by_id('12345').text)

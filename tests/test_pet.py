@@ -78,7 +78,8 @@ import json
                           ]
                          )
 def test_add_pet_negative(input, output):
-    assert Pet().create_new(**input).status_code == output
+    with allure.step('Check invalid input'):
+        assert Pet().create(**input).status_code == output
 
 
 @pytest.mark.parametrize('input, output',
@@ -88,15 +89,22 @@ def test_add_pet_negative(input, output):
                             'status': 'pending'}, HTTPStatus.OK)
                           ])
 def test_add_pet_positive(input, output):
-    assert Pet().create_new(**input).status_code == output
+    new_pet = Pet().create(**input)
+    with allure.step('check valid input data'):
+        assert new_pet.status_code == output
     if 'id' in input:
-        assert Pet().create_new(**input).json()['id'] == input['id']
+        with allure.step('check if object with specified id was created with find_by_id method'):
+            assert Pet().find_by_id(str(input['id'])).json()['id'] == input['id']
+    if 'status' in input:
+        with allure.step('check if object with specified status was created with find_by_status method'):
+            assert new_pet.json() in Pet().find_by_status(new_pet.json()['status']).json()
 
 
 @pytest.mark.parametrize('status', ['available', 'pending', 'sold'])
 def test_status_sort(status):
     for record in Pet().find_by_status(status).json():
-        assert record['status'] == status
+        with allure.step('check if all founded objects with find_by_status method have status they were searched for'):
+            assert record['status'] == status
 
 ####################################################################################################################
 
@@ -108,7 +116,7 @@ DATA = {
 
 
 p = Pet()
-new_pet = p.create_new(name='doggie', photoUrls=["string"], status='available')
+new_pet = p.create(name='doggie', photoUrls=["string"], status='available')
 json_new_pet = new_pet.json()
 pet_id = str(json_new_pet['id'])
 
