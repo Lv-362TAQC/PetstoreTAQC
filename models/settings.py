@@ -46,7 +46,7 @@ DOD_SUBBREEDS = [('affenpinscher', []),
                  ('wolfhound', ['irish']),
                  ('mastiff', ['bull', 'english', 'tibetan'])]
 
-"""set data for test_store_get_del"""
+#set data: test_store_get_del.
 BASE_URL_ORD = "https://petstore.swagger.io/v2/store/order/"
 
 # POST data before DELETE.
