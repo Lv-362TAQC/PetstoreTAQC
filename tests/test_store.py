@@ -1,7 +1,7 @@
 """Testing store.py"""
 from models.store import Store
 from http import HTTPStatus
-from models.logger import logger
+from models.settings import LOGGER as logger
 import pytest
 import json
 

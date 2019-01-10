@@ -1,0 +1,4 @@
+pet.py                      47 DEBUG    Convert input data to JSON data
+pet.py                      49 INFO     input data converted to JSON data: {'name': 'hyfugviust', 'photoUrls': []}
+pet.py                      50 DEBUG    Request: POST {'name': 'hyfugviust', 'photoUrls': []} to https://petstore.swagger.io/v2/pet/
+pet.py                      54 INFO     Response: Status code 200{"id":-9223372036854775808,"name":"hyfugviust","photoUrls":[],"tags":[]}

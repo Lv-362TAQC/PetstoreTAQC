@@ -1,0 +1,3 @@
+user.py                     45 DEBUG    Send GET http://petstore.swagger.io/v2/user/test
+user.py                     47 INFO     Response: Status code 200, {"id":0,"username":"test","firstName":"test","lastName":"test","email":"test","password":"test","phone":"test","userStatus":0}, http://petstore.swagger.io/v2/user/test
+user.py                     66 DEBUG    0, test, test, test, test, test, test, 0

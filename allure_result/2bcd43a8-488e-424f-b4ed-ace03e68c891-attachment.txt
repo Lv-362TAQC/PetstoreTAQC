@@ -1,0 +1,1 @@
+ipapi.py                    58 DEBUG    Getting currency. Status code: 404. Something went wrong

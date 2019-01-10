@@ -1,0 +1,1 @@
+ipapi.py                    56 INFO     Getting currency. Status code: 200. Successful operation.

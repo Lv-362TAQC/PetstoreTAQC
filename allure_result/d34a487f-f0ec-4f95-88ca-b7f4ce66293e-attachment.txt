@@ -1,0 +1,2 @@
+dog.py                      36 DEBUG    Request: GET https://dog.ceo/api/wrong/link/all
+dog.py                      38 INFO     Response: Status code 404, 404 Error, page not found. API documentation is located at https://dog.ceo/dog-api, https://dog.ceo/api/wrong/link/all

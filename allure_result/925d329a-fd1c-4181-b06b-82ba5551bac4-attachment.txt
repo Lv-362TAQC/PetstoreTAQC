@@ -1,0 +1,1 @@
+exchange.py                 78 INFO     Code status: 200. Successful operation. URL: https://api.exchangeratesapi.io/2010-01-12

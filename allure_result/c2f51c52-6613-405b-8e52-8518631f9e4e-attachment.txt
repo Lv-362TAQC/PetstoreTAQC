@@ -1,0 +1,5 @@
+postcodes.py                36 INFO     Lookup a postcode. Status code: 200. Successful operation.
+postcodes.py                38 DEBUG    Lookup a postcode. Status code: 400. Something went wrong
+postcodes.py                38 DEBUG    Lookup a postcode. Status code: 404. Something went wrong
+postcodes.py                36 INFO     Lookup a postcode. Status code: 200. Successful operation.
+postcodes.py                36 INFO     Lookup a postcode. Status code: 200. Successful operation.

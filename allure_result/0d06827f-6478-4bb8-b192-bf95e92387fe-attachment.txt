@@ -1,0 +1,2 @@
+user.py                     45 DEBUG    Send GET http://petstore.swagger.io/v2/user/aerbvtest
+user.py                     47 INFO     Response: Status code 500, {"code":500,"type":"unknown","message":"something bad happened"}, http://petstore.swagger.io/v2/user/aerbvtest

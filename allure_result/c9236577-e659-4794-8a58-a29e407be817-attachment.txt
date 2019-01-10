@@ -1,0 +1,1 @@
+ipapi.py                    28 DEBUG    Getting country. Status code: 404. Something went wrong

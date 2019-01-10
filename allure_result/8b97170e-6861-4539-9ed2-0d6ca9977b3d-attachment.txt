@@ -1,0 +1,1 @@
+exchange.py                 63 INFO     Code status: 200. Successful operation. URL: https://api.exchangeratesapi.io/latest?symbols=USD,GBP
