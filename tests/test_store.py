@@ -4,18 +4,18 @@ from http import HTTPStatus
 import pytest
 import json
 import allure
-from models.settings import STORE_TEST_DATA, STORE_EMPTY_DATA, STORE_DEFAULT
+from models.settings import STORE_TEST_DATA, STORE_EMPTY_DATA, STORE_DEFAULT, STORE_WRONG_DATA
 
 r = Store()
 
-
+@allure.step
 def test_inventory():
     with allure.step("Check status code of inventory request."):
         assert r.get_inventory().status_code == HTTPStatus.OK
     with allure.step("Check content type of inventory request."):
         assert r.get_inventory().headers['Content-Type'] == 'application/json'
 
-
+@allure.step
 @pytest.mark.parametrize('data', STORE_TEST_DATA)
 def test_order(data):
     data_id = json.loads(data)
@@ -24,11 +24,14 @@ def test_order(data):
     with allure.step("Check if order with given id was placed."):
         assert r.order(data).json() == r.check_order(data_id['id']).json()
 
-
+@allure.step
 def test_order_empty():
     with allure.step("Check if server returns default response when it receives empty json input."):
         assert r.order(STORE_EMPTY_DATA).text == STORE_DEFAULT
 
-
+@allure.step
+@pytest.mark.xfail
 def test_for_wrong_input():
-    pass    # wrong json input
+    with allure.step("Checking for valid inputs."):
+        if not isinstance(STORE_WRONG_DATA, (bytes, bytearray)):
+            raise TypeError("The JSON object must be str, bytes or bytearray")

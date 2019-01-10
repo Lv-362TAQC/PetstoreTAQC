@@ -29,6 +29,7 @@ STORE_TEST_DATA = [
           "status": "placed", "complete": false}"""]
 STORE_EMPTY_DATA = """{}"""
 STORE_DEFAULT = """{"id":0,"petId":0,"quantity":0,"complete":false}"""
+STORE_WRONG_DATA = 5
 
 #Test data: User
 USER_USERNAME_VALID = ['test', 'user1', 'user2']
