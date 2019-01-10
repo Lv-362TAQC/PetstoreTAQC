@@ -1,14 +1,18 @@
+"""Tests for DodAPI."""
+
 from models.dog import Dog
 from http import HTTPStatus
 import allure
 import pytest
+from models.settings import DOD_SUBBREEDS, DOG_LINK_TYPE
 
 
-@allure.testcase('', 'DogAPI')
+@allure.story('DogAPI')
 @allure.step('Check if input is image url')
 def step_is_jpg_image(url: str):
     assert url.lower().endswith('.jpg')
-    allure.attach(url,attachment_type=allure.attachment_type.TEXT)
+    allure.attach(url, attachment_type=allure.attachment_type.TEXT)
+
 
 @allure.step
 @allure.story('DogAPI')
@@ -18,6 +22,7 @@ def test_find_request_positive():
         assert response.status_code == HTTPStatus.OK
     allure.attach(response.text, attachment_type=allure.attachment_type.TEXT)
 
+
 @allure.step
 @allure.story('DogAPI')
 def test_find_request_negative():
@@ -26,20 +31,16 @@ def test_find_request_negative():
         assert response.status_code == HTTPStatus.NOT_FOUND
     allure.attach(response.text, attachment_type=allure.attachment_type.TEXT)
 
+
 @allure.step
 @allure.story('DogAPI')
-@pytest.mark.parametrize(('inputs', 'outputs'), [
-    ('https://dog.ceo/api/breeds/list/all', dict),
-    ('https://dog.ceo/api/breeds/image/random', str),
-    ('https://dog.ceo/api/breed/hound/images', list),
-    ('https://dog.ceo/api/breed/hound/list', list),
-    ('https://dog.ceo/api/breed/dingo/images/random', str)
-])
+@pytest.mark.parametrize(('inputs', 'outputs'), DOG_LINK_TYPE)
 def test_response_type_message(inputs, outputs):
     response = Dog._response(inputs)
     with allure.step("Check output type"):
         assert isinstance(response, outputs)
     allure.attach(str(response), attachment_type=allure.attachment_type.TEXT)
+
 
 @allure.step
 @allure.story('DogAPI')
@@ -51,10 +52,12 @@ def test_get_breed_list():
         assert 'meow' not in dogs_list
     allure.attach(str(dogs_list), attachment_type=allure.attachment_type.TEXT)
 
+
 @allure.step
 @allure.story('DogAPI')
 def test_get_random_image():
     step_is_jpg_image(Dog().get_random_image())
+
 
 @allure.step
 @allure.story('DogAPI')
@@ -64,14 +67,14 @@ def test_get_images_by_breed():
         step_is_jpg_image(item)
     allure.attach(str(response_text), attachment_type=allure.attachment_type.TEXT)
 
+
 @allure.step
 @allure.story('DogAPI')
-@pytest.mark.parametrize('inputs, outputs', [('affenpinscher', []),
-                                             ('wolfhound', ['irish']),
-                                             ('mastiff', ['bull', 'english', 'tibetan'])])
+@pytest.mark.parametrize('inputs, outputs', DOD_SUBBREEDS)
 def test_get_subbreed_by_breed(inputs, outputs):
     subbreed = Dog().get_subbreed_by_breed(inputs)
     assert subbreed == outputs
+
 
 @allure.step
 @allure.story('DogAPI')
